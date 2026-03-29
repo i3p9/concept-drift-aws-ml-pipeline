@@ -367,7 +367,7 @@ export default function App() {
 
 			{/* Metrics Cards */}
 			<div className='mb-8'>
-				<MetricsCards data={latestMetrics} usePrevData={usePrevData} />
+				<MetricsCards data={latestMetrics} />
 			</div>
 
 			{/* Two column: main content + controls */}

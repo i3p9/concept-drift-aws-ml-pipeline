@@ -1,6 +1,4 @@
-const BASELINE_ROWS = 60800;
-
-export default function MetricsCards({ data, usePrevData }) {
+export default function MetricsCards({ data }) {
   const d = data || {};
   const improvement = d.static_mae && d.adaptive_mae
     ? ((d.static_mae - d.adaptive_mae) / d.static_mae * 100)
@@ -13,9 +11,7 @@ export default function MetricsCards({ data, usePrevData }) {
     return `${Math.floor(mins / 60)}h`;
   })() : null;
 
-  const totalRecords = d.total_records
-    ? (usePrevData ? d.total_records + BASELINE_ROWS : d.total_records)
-    : (usePrevData ? BASELINE_ROWS : null);
+  const totalRecords = d.total_records || null;
 
   const cards = [
     { label: 'MODEL', value: d.model_version || '--', accent: '#2563eb', bg: '#eff6ff' },

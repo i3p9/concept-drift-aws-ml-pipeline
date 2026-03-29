@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Build output
+frontend/dist/
+
+# Lambda layer (288MB of installed packages — too large for git)
+infrastructure/lambda_layer/
+
+# Trained model binaries (too large for git, retrain locally)
+models/*.joblib
+
+# Lambda zip artifacts
+lambdas/**/*.zip
+
+# Environment and credentials
+.env
+frontend/.env
+API_CREDENTIALS.md
+
+# Internal planning docs (not deliverables)
+00_MASTER_PLAN.md
+01_AWS_SETUP.md
+02_DYNAMODB_SCHEMA.md
+03_LAMBDA_FUNCTIONS.md
+04_API_GATEWAY.md
+05_FRONTEND_DASHBOARD.md
+06_SECURITY_CONFIG.md
+07_DEMO_SCRIPT.md
+08_TESTING_PLAN.md
+09_DELIVERABLES_CHECKLIST.md
+PROGRESS_CHECKPOINT.md
+
+# Deliverables document (professor's guidelines, not our code)
+deliverables_document/
+
+# Vite boilerplate README (not our project README)
+frontend/README.md
+
+# OS files
+.DS_Store
+*.DS_Store

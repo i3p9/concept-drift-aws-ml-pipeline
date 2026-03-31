@@ -4,7 +4,7 @@ We built this for CS6905 (Cloud Information Management Systems) at UNB. The idea
 
 ## API Collection
 
-You can find the Postman collection for our API here: [[Inventory ML Pipeline API](https://documenter.getpostman.com/view/53630301/2sBXinHWHG)](https://documenter.getpostman.com/view/53630301/2sBXinHWHG)
+You can find the Postman collection for our API here: [https://documenter.getpostman.com/view/53630301/2sBXinHWHG)](https://documenter.getpostman.com/view/53630301/2sBXinHWHG)
 
 ## What it does
 

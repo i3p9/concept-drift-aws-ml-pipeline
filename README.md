@@ -2,6 +2,10 @@
 
 We built this for CS6905 (Cloud Information Management Systems) at UNB. The idea is pretty straightforward: ML models go stale. A model trained on September sales data is going to be confused when December rolls around. So we built a serverless pipeline on AWS that detects this drift and retrains automatically.
 
+## API Collection
+
+You can find the Postman collection for our API here: [[Inventory ML Pipeline API](https://documenter.getpostman.com/view/53630301/2sBXinHWHG)](https://documenter.getpostman.com/view/53630301/2sBXinHWHG)
+
 ## What it does
 
 Retail demand shifts all the time -- seasons change, holidays happen, promotions come and go. We wanted to show that a model which keeps learning from new data will beat one that just sits there. And it does.
@@ -127,12 +131,14 @@ Fair warning: be very careful about what you strip out of numpy and scipy. We lo
 ### 4. Deploy Lambda Functions
 
 Each handler in `lambdas/` goes up as its own Lambda function. Set these environment variables on each:
+
 - `TABLE_NAME=InventoryMLPipeline`
 - `MODEL_BUCKET=inventory-ml-models-ACCOUNT_ID`
 
 Attach the `ml-dependencies` layer to `retrain-model` and `inference`. The other two Lambdas don't need it. Category encoding is hardcoded in the Lambda code so there's no separate encoder file to worry about.
 
 Then wire up the triggers:
+
 - `feature-engineering` gets triggered by DynamoDB Streams on `InventoryMLPipeline`
 - `retrain-model` gets triggered by an EventBridge rule on `rate(7 days)`
 
@@ -140,16 +146,16 @@ Then wire up the triggers:
 
 Set up a REST API with these routes:
 
-| Method | Path | Lambda |
-|--------|------|--------|
-| POST | /ingest | ingest-sales |
-| POST | /retrain | retrain-model |
-| POST | /reset | inference |
-| GET | /predictions/{store_id} | inference |
-| GET | /predictions/{store_id}/history | inference |
-| GET | /metrics | inference |
-| GET | /metrics/latest | inference |
-| GET | /stores/{store_id}/inventory | inference |
+| Method | Path                            | Lambda        |
+| ------ | ------------------------------- | ------------- |
+| POST   | /ingest                         | ingest-sales  |
+| POST   | /retrain                        | retrain-model |
+| POST   | /reset                          | inference     |
+| GET    | /predictions/{store_id}         | inference     |
+| GET    | /predictions/{store_id}/history | inference     |
+| GET    | /metrics                        | inference     |
+| GET    | /metrics/latest                 | inference     |
+| GET    | /stores/{store_id}/inventory    | inference     |
 
 Enable API key requirement on all routes and deploy to a `prod` stage.
 
